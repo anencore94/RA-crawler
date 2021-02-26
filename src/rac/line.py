@@ -6,6 +6,7 @@ from const import *
 """
 single page
 """
+job_posting_msg = []
 
 line_url = line_url_base + "/ko/jobs?co=Korea"
 html = urlopen(line_url)
@@ -18,10 +19,8 @@ for cover in bsObject.find_all('ul', {'class': 'job_list'}):
         'li > a > h3'
     )
 
-answer = []
-
 for a, tls in zip(hrefs, titles):
     href = a.get('href')
     tl = tls.text.lower()
     if re.compile('|'.join(search_list), re.IGNORECASE).search(tl):
-        answer.append((tls.text, line_url_base + href))
+        job_posting_msg.append((tls.text, line_url_base + href))

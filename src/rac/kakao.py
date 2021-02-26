@@ -7,7 +7,7 @@ from const import *
 need pagination
 """
 
-answer = []
+job_posting_msg = []
 page_num = 1
 
 url = kakao_url_base + "/" + "jobs"
@@ -34,6 +34,4 @@ for page_num in range(1, page_count + 1):
         href = a.get('href')
         tl = tls.text.lower()
         if re.compile('|'.join(search_list), re.IGNORECASE).search(tl):
-            answer.append((tls.text, kakao_url_base + href))
-
-print(answer)
+            job_posting_msg.append((tls.text, kakao_url_base + href))
