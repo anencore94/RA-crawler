@@ -27,7 +27,7 @@ for cover in bsObject.find_all('ul', {'class': 'list_jobs'}):
 for a, tls in zip(hrefs, titles):
     href = a.get('href')
     tl = tls.text.lower()
-    if re.compile('|'.join(search_list), re.IGNORECASE).search(tl):
+    if re.compile('|'.join(keywords_to_search), re.IGNORECASE).search(tl):
         answer.append((tls.text, kakao_url_base + href))
 
 print(answer)

@@ -32,6 +32,6 @@ for page_num in range(1, page_count + 1):
 
     for a, tls in zip(hrefs, titles):
         href = a.get('href')
-        tl = tls.text.lower()
-        if re.compile('|'.join(search_list), re.IGNORECASE).search(tl):
+        tl = tls.text.lower().replace(" ", "")
+        if re.compile('|'.join(keywords_to_search), re.IGNORECASE).search(tl):
             job_posting_msg.append((tls.text, kakao_url_base + href))
