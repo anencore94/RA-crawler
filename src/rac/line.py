@@ -21,6 +21,6 @@ for cover in bsObject.find_all('ul', {'class': 'job_list'}):
 
 for a, tls in zip(hrefs, titles):
     href = a.get('href')
-    tl = tls.text.lower().replace(" ", "")
+    tl = tls.text.lower()
     if re.compile('|'.join(keywords_to_search), re.IGNORECASE).search(tl):
         job_posting_msg.append((tls.text, line_url_base + href))
