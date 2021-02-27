@@ -19,15 +19,14 @@ url = naver_url_base + "/list/developer"
 # chrome driver setting
 chrome_options = webdriver.ChromeOptions()
 driverPath = ''
-if platform.system() == 'Windows':
+if platform.system() == 'Windows':  # for my dev environment
     driverPath = "../../lib/win/chromedriver.exe"
-elif platform.system() == 'Linux':
+elif platform.system() == 'Linux':  # for github-action
     driverPath = os.path.join('chromedriver')
     chrome_options.add_argument('--headless')  # headless
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--disable-gpu')
-
 else:
     print("Not implemented yet")
     exit(1)

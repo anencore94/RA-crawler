@@ -1,6 +1,8 @@
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
 import re
+from urllib.request import urlopen
+
+from bs4 import BeautifulSoup
+
 from const import *
 
 """
@@ -16,7 +18,6 @@ bsObject = BeautifulSoup(html, "html.parser")
 
 page_list = bsObject.findAll("a", {"class": "link_page"})
 page_count = len(page_list) + 1
-# print(page_count)
 
 for page_num in range(1, page_count + 1):
     html = urlopen(url + "?page=" + str(page_num))
