@@ -1,10 +1,11 @@
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
-import re
-from const import *
-from selenium import webdriver
-import time
+import os
 import platform
+import re
+import time
+
+from selenium import webdriver
+
+from const import *
 
 """
 더보기 버튼으로 인해 selenium 필요
@@ -16,16 +17,22 @@ page_num = 1
 url = naver_url_base + "/list/developer"
 
 # chrome driver setting
+chrome_options = webdriver.ChromeOptions()
 driverPath = ''
 if platform.system() == 'Windows':
     driverPath = "../../lib/win/chromedriver.exe"
 elif platform.system() == 'Linux':
-    driverPath = "../../lib/linux/chromedriver"
+    driverPath = os.path.join('chromedriver')
+    chrome_options.add_argument('--headless')  # headless
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-gpu')
+
 else:
     print("Not implemented yet")
     exit(1)
 
-driver = webdriver.Chrome(driverPath)
+driver = webdriver.Chrome(driverPath, chrome_options=chrome_options)
 driver.get(url)
 
 # 경력 탭 클릭
@@ -53,6 +60,6 @@ for i in range(len(jobs)):
     title = jobs[i].find_element_by_xpath('./a/span/strong').text
     href = jobs[i].find_element_by_xpath('./a').get_attribute('href')
 
-    if re.compile('|'.join(keywords_to_search), re.IGNORECASE).search(title.lower()):
+    if re.compile('|'.join(keywords_to_search), re.IGNORECASE).search(
+            title.lower()):
         job_posting_msg.append((title, href))
-
