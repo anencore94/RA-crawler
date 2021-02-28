@@ -7,7 +7,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: 0 0 * * * # 매일 09:00 KTC 인데 30 분정도 delay 있음
+    - cron: 0 23 * * * # 매일 08:00 KTC 인데 30 분정도 delay 있음
 
 jobs:
   lint:
