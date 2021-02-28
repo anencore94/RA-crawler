@@ -9,11 +9,12 @@ import naver
 
 def run(param):
     t_bot = telegram.Bot(token=param['bot_access_token'])
-    key = param['keywords_to_search']
-    print(f'키워드 {key}에 속하는 채용 공고를 찾습니다.')
-    msg_candidates = [line.line(param['keywords_to_search']),
-                      kakao.kakao(param['keywords_to_search']),
-                      naver.naver(param['keywords_to_search'])]
+    keywords = param['keywords_to_search']
+    print(f'키워드 {keywords}에 속하는 채용 공고를 찾습니다.')
+
+    msg_candidates = [line.line(keywords),
+                      kakao.kakao(keywords),
+                      naver.naver(keywords)]
 
     msg = ''
     for comp, msg_cand in zip(['Line', 'Kakao', 'Naver'], msg_candidates):
