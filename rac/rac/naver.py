@@ -12,7 +12,7 @@ import const
 """
 
 
-def naver(keywords):
+def get_msgs(keywords):
     job_posting_msg = []
 
     url = const.CompanyUrl.NAVER + "/list/developer"

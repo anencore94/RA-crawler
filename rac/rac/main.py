@@ -13,9 +13,9 @@ def run(param):
     keywords = param['keywords_to_search']
     print(f'키워드 {keywords}에 속하는 채용 공고를 찾습니다.')
 
-    msg_candidates = [line.line(keywords),
-                      kakao.kakao(keywords),
-                      naver.naver(keywords)]
+    msg_candidates = [line.get_msgs(keywords),
+                      kakao.get_msgs(keywords),
+                      naver.get_msgs(keywords)]
 
     msg = ''
     for company, msg_cand in zip([comp.name for comp in const.CompanyUrl],

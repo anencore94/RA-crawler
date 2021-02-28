@@ -10,7 +10,7 @@ need pagination
 """
 
 
-def kakao(keywords):
+def get_msgs(keywords):
     hrefs, titles = [], []
     job_posting_msg = []
 
