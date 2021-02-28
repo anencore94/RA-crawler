@@ -34,4 +34,4 @@ jobs:
         chromedriver-version: '88.0.4324.96'
     - name: run
       run: |
-        python rac/rac/main.py --keywords_to_search=['a', 'bbbb', '전문연구']
+        python rac/rac/main.py -k 'ml' -k 'dl' -k 'm/l' -k 'd/l' -k 'machine' -k 'deep' -k 'scientist' -k '머신' -k '딥' -k '사이언티스트' -k '사이언스' -k '학습' -k '전문연구'
