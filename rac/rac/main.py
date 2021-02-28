@@ -2,10 +2,10 @@ import argparse
 
 import telegram
 
+import const
 import kakao
 import line
 import naver
-import const
 
 
 def run(param):
@@ -27,14 +27,12 @@ def run(param):
 
 
 if __name__ == "__main__":
-    bot_access_token = '1638721240:AAGUo6cYy0VujwOJEcvZ9hRu_mee3aTFhpM'
-    my_telegram_id = '1010631797'
-
     parser = argparse.ArgumentParser()
-    parser.add_argument('--bot_access_token', type=str,
-                        default=bot_access_token)
-    parser.add_argument('--telegram_id', type=str, default=my_telegram_id)
-    parser.add_argument('--keywords_to_search', '-k', action='append')
+    parser.add_argument('--bot_access_token', '-b', type=str,
+                        required=True)
+    parser.add_argument('--telegram_id', '-t', type=str, required=True)
+    parser.add_argument('--keywords_to_search', '-k', action='append',
+                        required=True)
 
     args = parser.parse_args()
     dict_formatted_args = vars(args)
