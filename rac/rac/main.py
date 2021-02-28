@@ -5,6 +5,7 @@ import telegram
 import kakao
 import line
 import naver
+import const
 
 
 def run(param):
@@ -17,9 +18,10 @@ def run(param):
                       naver.naver(keywords)]
 
     msg = ''
-    for comp, msg_cand in zip(['Line', 'Kakao', 'Naver'], msg_candidates):
-        msg += '[' + comp + ']' + '\n' \
-               + str("{}\n" * len(msg_cand)).format(*msg_cand) + '\n'
+    for company, msg_cand in zip([comp.name for comp in const.CompanyUrl],
+                                 msg_candidates):
+        msg += f'[{company}]\n' + \
+               str("{}\n" * len(msg_cand)).format(*msg_cand) + '\n'
 
     t_bot.send_message(param['telegram_id'], msg)
 
