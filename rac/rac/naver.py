@@ -5,7 +5,7 @@ import time
 
 from selenium import webdriver
 
-from const import *
+import const
 
 """
 더보기 버튼으로 인해 selenium 필요
@@ -14,14 +14,14 @@ from const import *
 job_posting_msg = []
 page_num = 1
 
-url = naver_url_base + "/list/developer"
+url = const.CompanyUrl.NAVER + "/list/developer"
 
 # chrome driver setting
 chrome_options = webdriver.ChromeOptions()
 driverPath = ''
-if platform.system() == 'Windows':  # for my dev environment
+if platform.system() == 'Windows':  # for my local dev env
     driverPath = "../../lib/win/chromedriver.exe"
-elif platform.system() == 'Linux':  # for github-action
+elif platform.system() == 'Linux':  # for github-action env
     driverPath = os.path.join('chromedriver')
     chrome_options.add_argument('--headless')  # headless
     chrome_options.add_argument('--no-sandbox')
@@ -35,8 +35,8 @@ driver = webdriver.Chrome(driverPath, chrome_options=chrome_options)
 driver.get(url)
 
 # 경력 탭 클릭
-seni = driver.find_element_by_xpath('//*[@id="entType002"]/a')
-seni.click()
+senior_tab = driver.find_element_by_xpath('//*[@id="entType002"]/a')
+senior_tab.click()
 
 # scroll down & 10 개 더보기 안나올때까지 클릭
 scroll_pause_time = 1.5
@@ -59,6 +59,6 @@ for i in range(len(jobs)):
     title = jobs[i].find_element_by_xpath('./a/span/strong').text
     href = jobs[i].find_element_by_xpath('./a').get_attribute('href')
 
-    if re.compile('|'.join(keywords_to_search), re.IGNORECASE).search(
+    if re.compile('|'.join(const.keywords_to_search), re.IGNORECASE).search(
             title.lower()):
         job_posting_msg.append((title, href))

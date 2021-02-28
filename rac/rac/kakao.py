@@ -3,7 +3,7 @@ from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
 
-from const import *
+import const
 
 """
 need pagination
@@ -12,7 +12,7 @@ need pagination
 job_posting_msg = []
 page_num = 1
 
-url = kakao_url_base + "/" + "jobs"
+url = const.CompanyUrl.KAKAO + "/" + "jobs"
 html = urlopen(url)
 bsObject = BeautifulSoup(html, "html.parser")
 
@@ -34,5 +34,5 @@ for page_num in range(1, page_count + 1):
     for a, tls in zip(hrefs, titles):
         href = a.get('href')
         tl = tls.text.lower()
-        if re.compile('|'.join(keywords_to_search), re.IGNORECASE).search(tl):
-            job_posting_msg.append((tls.text, kakao_url_base + href))
+        if re.compile('|'.join(const.keywords_to_search), re.IGNORECASE).search(tl):
+            job_posting_msg.append((tls.text, const.CompanyUrl.KAKAO + href))
