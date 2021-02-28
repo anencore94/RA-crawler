@@ -34,4 +34,4 @@ jobs:
         chromedriver-version: '88.0.4324.96'
     - name: run
       run: |
-        python rac/rac/main.py
+        python rac/rac/main.py --keywords_to_search=['a', 'bbbb', '전문연구']
