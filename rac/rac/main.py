@@ -23,6 +23,8 @@ def run(param):
         msg += f'[{company}]\n' + \
                str("{}\n" * len(msg_cand)).format(*msg_cand) + '\n'
 
+    print(msg)
+
     t_bot.send_message(param['telegram_id'], msg)
 
 
